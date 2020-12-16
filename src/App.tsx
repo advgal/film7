@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
+import {Film} from './film';
+
 
 function App () {
     const [filme, setFilme] = useState ([]);
@@ -13,23 +16,31 @@ function App () {
             "https://api.themoviedb.org/3/discover/movie?api_key=d49416cd8a2e65767b5ac717906e3f63"
         );
         const json = await res.json ();
-        debugger;
         let results = json.results;
         setFilme (results);
     }
 
     const out=()=>{
-        return filme.map ((film:any) => (<li>{film.title}</li>));
+        return filme.map ((film:any) => (<li><Link to={`/film/${film.id}`}>{film.title}</Link></li>));
     }
     return (
-        <div className="App">
-            <h1>Filme</h1>
-            <ul>
-                {
-                    out()
-                }
-            </ul>
-        </div>
+        <Router>
+            <Switch>
+                <Route exact path="/">
+                    <div className="App">
+                        <h1>Filme</h1>
+                        <ul>
+                            {
+                                out ()
+                            }
+                        </ul>
+                    </div>
+                </Route>
+                <Route path="/film/:id" >
+                    <Film></Film>
+                </Route>
+            </Switch>
+        </Router>
     );
 }
 
