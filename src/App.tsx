@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
 import {Film} from './film';
+import {Button, PageHeader} from "antd";
 
 
 function App () {
@@ -25,6 +26,8 @@ function App () {
     }
     return (
         <Router>
+            <PageHeader title="Peters Filme"></PageHeader>
+            <Button type="primary">was?</Button>
             <Switch>
                 <Route exact path="/">
                     <div className="App">
